@@ -4,8 +4,6 @@ import Conteiner from './components/Conteiner';
 import ContactList from './components/ContactList';
 import Filter from './components/Filter';
 import Form from './components/Form';
-// import { v4 as uuidv4 } from 'uuid';
-// import { connect } from 'react-redux';
 
 class App extends Component {
   render() {

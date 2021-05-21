@@ -1,28 +1,34 @@
+import { Component } from 'react';
 import { connect } from 'react-redux';
-import actions from '../../redux/actions';
+import { operations, selectors } from '../../redux';
 
-const ContactList = ({ contacts, onDelete }) => (
-  <ul>
-    {contacts.map(({ id, name, number }) => (
-      <li key={id}>
-        {name}: {number}
-        <button onClick={() => onDelete(id)}>Delete</button>
-      </li>
-    ))}
-  </ul>
-);
-const getVisibleContacts = (contacts, filter) => {
-  const normalizedFilter = filter.toLocaleLowerCase();
-  return contacts.filter(contact =>
-    contact.name.toLocaleLowerCase().includes(normalizedFilter),
-  );
-};
+class ContactList extends Component {
+  componentDidMount() {
+    this.props.fetchContacts();
+  }
+  render() {
+    return (
+      <>
+        {this.props.isLoading && <h1>Loading...</h1>}
+        <ul>
+          {this.props.contacts.map(({ id, name, number }) => (
+            <li key={id}>
+              {name}: {number}
+              <button onClick={() => this.props.onDelete(id)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      </>
+    );
+  }
+}
 
-const mapStateToProps = ({ contacts: { contacts, filter } }) => ({
-  contacts: getVisibleContacts(contacts, filter),
-  // contacts: getVisibleContacts(contacts, filter),
+const mapStateToProps = state => ({
+  contacts: selectors.getVisibleContacts(state),
+  isLoading: selectors.getLoading(state),
 });
 const mapDispatchToProps = dispatch => ({
-  onDelete: id => dispatch(actions.deleteContacts(id)),
+  fetchContacts: () => dispatch(operations.fetchContacts()),
+  onDelete: id => dispatch(operations.deleteContacts(id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

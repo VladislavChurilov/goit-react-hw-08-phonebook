@@ -1,6 +1,7 @@
 import styles from '../../Phonebook.module.css';
 import { connect } from 'react-redux';
-import actions from '../../redux/actions';
+import * as actions from '../../redux/actions';
+import { selectors } from '../../redux';
 
 const Filter = ({ value, onChangeFilter }) => (
   <label className={styles.labelFilter}>
@@ -16,7 +17,7 @@ const Filter = ({ value, onChangeFilter }) => (
 );
 
 const mapStateToProps = state => ({
-  value: state.contacts.filter,
+  value: selectors.getFilter(state),
 });
 const mapDispatchToProps = dispatch => ({
   onChangeFilter: e => dispatch(actions.changeFilter(e.target.value)),

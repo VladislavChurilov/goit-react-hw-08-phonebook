@@ -2,13 +2,14 @@ import { Component } from 'react';
 import styles from '../../Phonebook.module.css';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
-import actions from '../../redux/actions';
+import { operations } from '../../redux';
 
 class Form extends Component {
   state = {
     name: '',
     number: '',
   };
+
   nameId = uuidv4();
   handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -62,6 +63,6 @@ class Form extends Component {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  onHandleChange: contacts => dispatch(actions.addContact(contacts)),
+  onHandleChange: contacts => dispatch(operations.addContact(contacts)),
 });
 export default connect(null, mapDispatchToProps)(Form);
