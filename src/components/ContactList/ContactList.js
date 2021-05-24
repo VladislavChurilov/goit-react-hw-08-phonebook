@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { operations, selectors } from '../../redux';
+import styles from '../../Phonebook.module.css';
 
 class ContactList extends Component {
   componentDidMount() {
@@ -9,6 +10,7 @@ class ContactList extends Component {
   render() {
     return (
       <>
+        <h2 className={styles.title}>Contacts</h2>
         {this.props.isLoading && <h1>Loading...</h1>}
         <ul>
           {this.props.contacts.map(({ id, name, number }) => (
