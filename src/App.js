@@ -9,6 +9,8 @@ import Conteiner from './components/Conteiner';
 import routes from './routes';
 import AppBar from './components/AppBar';
 import { authOperations } from './redux/auth';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 
 const Form = lazy(() =>
   import('./components/Form' /* webpackChunkName: "Form" */),
@@ -31,9 +33,26 @@ class App extends Component {
         <AppBar />
         <Suspense fallback={<h1>Load...</h1>}>
           <Switch>
-            <Route exact path={routes.contacts} component={Form} />
-            <Route exact path={routes.register} component={Register} />
-            <Route exact path={routes.login} component={Login} />
+            <PrivateRoute
+              exact
+              path={routes.contacts}
+              redirectTo="/login"
+              component={Form}
+            />
+            <PublicRoute
+              exact
+              path={routes.register}
+              redirectTo="/contacts"
+              restricted
+              component={Register}
+            />
+            <PublicRoute
+              exact
+              path={routes.login}
+              redirectTo="/contacts"
+              restricted
+              component={Login}
+            />
 
             {/* <h1 className={styles.titleHead}>Phonebook</h1> */}
             {/* <Form /> */}
