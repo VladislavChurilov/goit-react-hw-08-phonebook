@@ -1,28 +1,42 @@
-.phonebook{   
-    width: 400px;    
+.phonebook {
+  width: 600px;
+  padding: 10px;
 }
-.form{
-    display: flex;
-    flex-direction: column;
+.form {
+  display: flex;
+  flex-direction: column;
 }
-.titleHead{
-    font-size: 30px;
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
 }
-.title{
-    font-size: 26px;
+.Contacts {
+  text-decoration: none;
+  font-weight: 600;
 }
-
-.input{
-    width: 200px;
-    height: 20px;
-    margin-bottom: 10px;
+.activeLink {
+  color: rgb(180, 70, 6);
 }
-.labelFilter{
-    display: flex;
-    flex-direction: column;    
-    font-size: 20px;
+.UserMenu {
+  display: flex;
+  align-items: center;
 }
-.submitButton{    
-    justify-content: center;
-    width: 100px;
+.UserText {
+  margin-left: 5px;
+  margin-right: 10px;
+}
+.AuthNavConteiner {
+  display: flex;
+  justify-content: space-around;
+  width: 180px;
+}
+.AuthNav {
+  text-decoration: none;
+}
+.titleHead {
+  font-size: 24px;
+  margin: 10px;
+  text-decoration: none;
 }

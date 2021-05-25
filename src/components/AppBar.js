@@ -4,19 +4,16 @@ import styles from '../Phonebook.module.css';
 import AuthNav from './AuthNav';
 import { authSelectors } from '../redux/auth';
 import UserMenu from './UserMenu';
-
-const style = {
-  header: {
-    display: 'flex',
-  },
-};
+import Divider from '@material-ui/core/Divider';
 
 const AppBar = ({ isAuthenticated }) => (
-  <header style={style.header}>
-    <Navigation />
-    <h1 className={styles.titleHead}>Phonebook</h1>
-    {isAuthenticated ? <UserMenu /> : <AuthNav />}
-  </header>
+  <>
+    <header className={styles.header}>
+      <Navigation />
+      {isAuthenticated ? <UserMenu /> : <AuthNav />}
+    </header>
+    <Divider />
+  </>
 );
 
 const mapStateToProps = state => ({

@@ -1,7 +1,17 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { authOperations } from '../../redux/auth';
-
+import style from './Register.module.css';
+import { Button } from '@material-ui/core';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+const styles = {
+  FormControl: {
+    display: 'flex',
+    marginBottom: '20px',
+  },
+};
 class Register extends Component {
   state = {
     name: '',
@@ -25,43 +35,47 @@ class Register extends Component {
     const { name, email, password } = this.state;
 
     return (
-      <div>
-        <h1>Регистрация</h1>
-
-        <form onSubmit={this.handleSubmit} autoComplete="off">
-          <label>
-            Имя
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-            />
-          </label>
-
-          <label>
-            Почта
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            />
-          </label>
-
-          <label>
-            Пароль
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleChange}
-            />
-          </label>
-
-          <button type="submit">Зарегистрироваться</button>
-        </form>
-      </div>
+      <form
+        className={style.form}
+        onSubmit={this.handleSubmit}
+        autoComplete="off"
+      >
+        <FormControl style={styles.FormControl}>
+          <InputLabel>Name</InputLabel>
+          <Input
+            type="text"
+            name="name"
+            value={name}
+            onChange={this.handleChange}
+          />
+        </FormControl>
+        <FormControl style={styles.FormControl}>
+          <InputLabel>Enter email</InputLabel>
+          <Input
+            type="email"
+            name="email"
+            value={email}
+            onChange={this.handleChange}
+          />
+        </FormControl>
+        <FormControl style={styles.FormControl}>
+          <InputLabel>Password</InputLabel>
+          <Input
+            type="password"
+            name="password"
+            value={password}
+            onChange={this.handleChange}
+          />
+        </FormControl>
+        <Button
+          className={style.LoginButton}
+          type="submit"
+          variant="outlined"
+          color="primary"
+        >
+          Register
+        </Button>
+      </form>
     );
   }
 }

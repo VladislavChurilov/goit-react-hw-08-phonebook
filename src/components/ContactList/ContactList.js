@@ -1,7 +1,12 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { operations, selectors } from '../../redux';
-import styles from '../../Phonebook.module.css';
+import style from './ContactList.module.css';
+import { Button } from '@material-ui/core';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import ListItemText from '@material-ui/core/ListItemText';
 
 class ContactList extends Component {
   componentDidMount() {
@@ -9,18 +14,27 @@ class ContactList extends Component {
   }
   render() {
     return (
-      <>
-        <h2 className={styles.title}>Contacts</h2>
+      <div className={style.conteiner}>
+        <h2 className={style.title}>Contacts</h2>
         {this.props.isLoading && <h1>Loading...</h1>}
-        <ul>
+        <Divider />
+        <List>
           {this.props.contacts.map(({ id, name, number }) => (
-            <li key={id}>
+            <ListItem className={style.ListItem} key={id}>
               {name}: {number}
-              <button onClick={() => this.props.onDelete(id)}>Delete</button>
-            </li>
+              <ListItemText className={style.ListItem} />
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={() => this.props.onDelete(id)}
+              >
+                Delete
+              </Button>
+              <Divider />
+            </ListItem>
           ))}
-        </ul>
-      </>
+        </List>
+      </div>
     );
   }
 }

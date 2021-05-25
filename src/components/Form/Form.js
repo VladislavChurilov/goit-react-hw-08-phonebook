@@ -1,10 +1,21 @@
 import { Component } from 'react';
-import styles from '../../Phonebook.module.css';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
 import { operations } from '../../redux';
 import ContactList from '../ContactList';
 import Filter from '../Filter';
+import style from './Form.module.css';
+import { Button } from '@material-ui/core';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+
+const styles = {
+  FormControl: {
+    display: 'flex',
+    marginBottom: '20px',
+  },
+};
 
 class Form extends Component {
   state = {
@@ -29,38 +40,42 @@ class Form extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <div>
-        <form className={styles.form} onSubmit={this.handleSubmit}>
-          <label htmlFor={this.nameId}> Name </label>
-          <input
-            className={styles.input}
-            onChange={this.handleChange}
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            id={this.nameId}
-            value={name}
-            title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-            required
-          />
-          <label htmlFor={this.nameId}> Number </label>
-          <input
-            className={styles.input}
-            type="tel"
-            name="number"
-            value={number}
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-            onChange={this.handleChange}
-            required
-          />
-          <button
-            className={styles.submitButton}
+      <div className={style.formConteiner}>
+        <form className={style.form} onSubmit={this.handleSubmit}>
+          <FormControl style={styles.FormControl}>
+            <InputLabel htmlFor={this.nameId}>Name</InputLabel>
+            <Input
+              onChange={this.handleChange}
+              type="text"
+              name="name"
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              id={this.nameId}
+              value={name}
+              title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+              required
+            />
+          </FormControl>
+          <FormControl style={styles.FormControl}>
+            <InputLabel htmlFor={this.nameId}>Number</InputLabel>
+            <Input
+              type="tel"
+              name="number"
+              value={number}
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+              onChange={this.handleChange}
+              required
+            />
+          </FormControl>
+          <Button
+            className={style.LoginButton}
             type="submit"
+            variant="outlined"
+            color="primary"
             onSubmit={this.handleSubmit}
           >
             Add contact
-          </button>
+          </Button>
         </form>
         <Filter />
         <ContactList />

@@ -1,22 +1,23 @@
 import { NavLink } from 'react-router-dom';
+import styles from '../Phonebook.module.css';
 
 const AuthNav = () => (
-  <div>
+  <div className={styles.AuthNavConteiner}>
     <NavLink
       to="/register"
       exact
-      //   style={styles.link}
-      //   activeStyle={styles.activeLink}
+      className={styles.AuthNav}
+      activeClassName={styles.activeLink}
     >
-      Регистрация
+      Registration
     </NavLink>
     <NavLink
       to="/login"
       exact
-      //   style={styles.link}
-      //   activeStyle={styles.activeLink}
+      className={styles.AuthNav}
+      activeClassName={styles.activeLink}
     >
-      Логин
+      Log In
     </NavLink>
   </div>
 );

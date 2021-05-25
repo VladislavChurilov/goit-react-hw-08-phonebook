@@ -4,16 +4,6 @@ import storage from 'redux-persist/lib/storage';
 import reducer from './reducer';
 import { authReducer } from './auth';
 
-// =========== without localStorage====================
-// const middleware = [...getDefaultMiddleware(), logger];
-
-// const store = configureStore({
-//   reducer: { auth: authReducer, contacts: reducer },
-//   middleware,
-//   devTools: process.env.NODE_ENV === 'development',
-// });
-// export default store;
-
 // =========== with localStorage====================
 import {
   persistStore,
@@ -26,21 +16,12 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-// const persistConfig = {
-//   key: 'contacts',
-//   storage,
-//   blacklist: ['filter'],
-// };
-
-// const rootReducer = combineReducers({ contacts: reducer });
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
-  // logger,
 ];
 const authPersistConfig = {
   key: 'auth',
@@ -57,3 +38,13 @@ const store = configureStore({
 });
 const persistor = persistStore(store);
 export default { store, persistor };
+
+// =========== without localStorage====================
+// const middleware = [...getDefaultMiddleware(), logger];
+
+// const store = configureStore({
+//   reducer: { auth: authReducer, contacts: reducer },
+//   middleware,
+//   devTools: process.env.NODE_ENV === 'development',
+// });
+// export default store;

@@ -1,6 +1,3 @@
-// /register
-//     / login
-// /contacts
 const routes = {
   home: '/',
   register: '/register',

@@ -1,13 +1,15 @@
 import { connect } from 'react-redux';
 import { authSelectors, authOperations } from '../../redux/auth';
+import { Button } from '@material-ui/core';
+import styles from '../../Phonebook.module.css';
 
 const UserMenu = ({ avatar, name, onLogout }) => (
-  <div>
-    <img src={avatar} alt="" width="32" />
-    <span>Welcome, {name}</span>
-    <button type="button" onClick={onLogout}>
+  <div className={styles.UserMenu}>
+    <img src={avatar} alt="" width="32" height="32" />
+    <span className={styles.UserText}>Welcome, {name}</span>
+    <Button type="button" variant="outlined" color="primary" onClick={onLogout}>
       Logout
-    </button>
+    </Button>
   </div>
 );
 

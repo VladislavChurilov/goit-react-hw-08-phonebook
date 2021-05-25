@@ -1,17 +1,16 @@
 import { Component, Suspense, lazy } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
-// import styles from './Phonebook.module.css';
+import { Switch } from 'react-router-dom';
 import Conteiner from './components/Conteiner';
-// import ContactList from './components/ContactList';
-// import Filter from './components/Filter';
-// import Form from './components/Form';
 import routes from './routes';
 import AppBar from './components/AppBar';
 import { authOperations } from './redux/auth';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 
+const HeadPage = lazy(() =>
+  import('./components/HeadPage' /* webpackChunkName: "HeadPage" */),
+);
 const Form = lazy(() =>
   import('./components/Form' /* webpackChunkName: "Form" */),
 );
@@ -20,6 +19,9 @@ const Register = lazy(() =>
 );
 const Login = lazy(() =>
   import('./components/Login' /* webpackChunkName: "Login" */),
+);
+const NotFound = lazy(() =>
+  import('./components/NotFound' /* webpackChunkName: "NotFound" */),
 );
 
 class App extends Component {
@@ -53,12 +55,8 @@ class App extends Component {
               restricted
               component={Login}
             />
-
-            {/* <h1 className={styles.titleHead}>Phonebook</h1> */}
-            {/* <Form /> */}
-            {/* <h2 className={styles.title}>Contacts</h2> */}
-            {/* <Filter /> */}
-            {/* <ContactList /> */}
+            <PublicRoute exact path={routes.home} component={HeadPage} />
+            <PublicRoute component={NotFound} />
           </Switch>
         </Suspense>
       </Conteiner>
@@ -68,21 +66,5 @@ class App extends Component {
 const mapDispatchToProps = {
   onGetCurrentUser: authOperations.getCurrentUser,
 };
-// class App extends Component {
-//   render() {
-//     return (
-//       <Conteiner>
-//         {/* <AppBar /> */}
-//         {/* <Switch> */}
-//         <h1 className={styles.titleHead}>Phonebook</h1>
-//         <Form />
-//         <h2 className={styles.title}>Contacts</h2>
-//         <Filter />
-//         <ContactList />
-//         {/* </Switch> */}
-//       </Conteiner>
-//     );
-//   }
-// }
 
 export default connect(null, mapDispatchToProps)(App);
